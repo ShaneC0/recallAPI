@@ -1,8 +1,8 @@
-import { Resolver } from "type-graphql";
+import { Query, Resolver } from "type-graphql";
 import { Bookmark } from "../entity/Bookmark";
 
 
-@Resolver(Bookmark)
+@Resolver()
 export class BookmarkResolver {
 
 }

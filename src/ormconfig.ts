@@ -11,6 +11,5 @@ export default {
     "password": process.env.TYPEORM_PASSWORD,
     "database": process.env.TYPEORM_DATABASE,
     "synchronize": true,
-    "logging": true,
     "entities": [User, Bookmark]
 } as ConnectionOptions
