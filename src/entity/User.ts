@@ -1,26 +1,28 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { Bookmark } from "./Bookmark";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity } from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql"
 
 @ObjectType()
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Field()
-  @Column({ length: 75 })
-  name: string;
+  name!: string;
 
   @Field()
-  @Column("text")
-  email: string;
+  @Column({unique: true})
+  email!: string;
 
   @Column()
-  password: string;
+  password!: string;
 
-  @Field(() => [Bookmark])
-  @OneToMany(() => Bookmark, (bookmark) => bookmark.user)
-  bookmarks: Bookmark[];
+  @Field()
+  @CreateDateColumn()
+  createdDate: Date;
+
+  @Field()
+  @UpdateDateColumn()
+  updatedDate: Date;
 }

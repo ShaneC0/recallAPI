@@ -1,22 +1,33 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { User } from "./User";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column, 
+  CreateDateColumn,
+  UpdateDateColumn,
+  BaseEntity,
+} from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
 
 @ObjectType()
 @Entity()
-export class Bookmark {
+export class Bookmark extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Field()
-  @Column({ length: 200 })
-  name: string;
+  @Column()
+  name!: string;
 
   @Field()
-  @Column("text")
-  url: string;
+  @Column()
+  url!: string;
 
-  @ManyToOne(() => User, (user) => user.bookmarks)
-  user: User;
+  @Field()
+  @CreateDateColumn()
+  createdDate: Date;
+
+  @Field()
+  @UpdateDateColumn()
+  updatedDate: Date;
 }

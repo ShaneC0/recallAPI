@@ -1,0 +1,29 @@
+import { InputType, Field } from "type-graphql";
+import { IsEmail, IsFQDN, Length } from "class-validator";
+
+@InputType()
+export class authInput {
+  @Field()
+  @Length(2, 75)
+  name?: string;
+
+  @Field()
+  @IsEmail()
+  email: string;
+
+  @Field()
+  @Length(8)
+  password: string;
+}
+
+@InputType()
+export class bookmarkInput {
+  @Field()
+  @Length(2, 75)
+  name?: string;
+
+  @Field()
+  @IsFQDN()
+  url?: string;
+}
+
