@@ -1,5 +1,6 @@
 import { InputType, Field } from "type-graphql";
 import { IsEmail, IsFQDN, Length } from "class-validator";
+import { Request, Response } from "express";
 
 @InputType()
 export class authInput {
@@ -25,5 +26,10 @@ export class bookmarkInput {
   @Field()
   @IsFQDN()
   url?: string;
+}
+
+export type myContext = {
+  req: Request & { session: Express.Session },
+  res: Response
 }
 
