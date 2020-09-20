@@ -19,11 +19,11 @@ export class authInput {
 
 @InputType()
 export class bookmarkInput {
-  @Field()
+  @Field({nullable: true})
   @Length(2, 75)
   name?: string;
 
-  @Field()
+  @Field({nullable: true})
   @IsFQDN()
   url?: string;
 }

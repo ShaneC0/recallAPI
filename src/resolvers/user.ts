@@ -6,9 +6,13 @@ import { getConnection } from "typeorm";
 
 @Resolver(User)
 export class userResolver {
-  @Query(() => User)
+  @Query(() => User, { nullable: true })
   me(@Ctx() { req }: myContext) {
-    return User.findOne(req.session.userId);
+    if (req.session.userId) {
+      return User.findOne(req.session.userId);
+    } else {
+      return null;
+    }
   }
 
   @Mutation(() => User)
