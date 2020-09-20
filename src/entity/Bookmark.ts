@@ -5,8 +5,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
+  ManyToOne,
 } from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
+import { User } from "./User";
 
 @ObjectType()
 @Entity()
@@ -30,4 +32,12 @@ export class Bookmark extends BaseEntity {
   @Field()
   @UpdateDateColumn()
   updatedDate: Date;
+
+  @Field(() => User)
+  @ManyToOne(() => User, (user) => user.bookmarks)
+  user!: User;
+
+  @Field(() => ID)
+  @Column()
+  userId!: number;
 }

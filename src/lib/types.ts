@@ -19,6 +19,18 @@ export class authInput {
 
 @InputType()
 export class bookmarkInput {
+  @Field()
+  @Length(2, 75)
+  name: string;
+
+  @Field()
+  @IsFQDN()
+  url: string;
+}
+
+
+@InputType()
+export class updateBookmarkInput {
   @Field({nullable: true})
   @Length(2, 75)
   name?: string;
@@ -27,6 +39,7 @@ export class bookmarkInput {
   @IsFQDN()
   url?: string;
 }
+
 
 export type myContext = {
   req: Request & { session: Express.Session },

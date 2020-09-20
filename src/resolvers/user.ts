@@ -9,7 +9,7 @@ export class userResolver {
   @Query(() => User, { nullable: true })
   me(@Ctx() { req }: myContext) {
     if (req.session.userId) {
-      return User.findOne(req.session.userId);
+      return User.findOne(req.session.userId, { relations: ["bookmarks"]});
     } else {
       return null;
     }
