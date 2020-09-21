@@ -23,8 +23,8 @@ export class bookmarkResolver {
     if (!req.session.userId) {
       throw new Error("Must be logged in to create bookmark");
     } else {
-      const currentUser = await User.findOne({id: req.session.userId})
-      return Bookmark.create({ ...options, user: currentUser}).save();
+      const currentUser = await User.findOne({ id: req.session.userId });
+      return Bookmark.create({ ...options, user: currentUser }).save();
     }
   }
 

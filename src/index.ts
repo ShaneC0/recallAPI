@@ -9,6 +9,7 @@ import { userResolver } from "./resolvers/user";
 import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
+import "dotenv-safe/config";
 
 const main = async () => {
   await createConnection(config);
