@@ -21,7 +21,7 @@ const main = async () => {
   app.use(
     session({
       name: "qid",
-      secret: "change me",
+      secret: process.env.COOKIE_SECRET,
       resave: false,
       saveUninitialized: false,
       store: new redisStore({ client: redisClient, disableTouch: true }),
