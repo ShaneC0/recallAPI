@@ -9,7 +9,7 @@ export class userResolver {
   @Query(() => User, { nullable: true })
   me(@Ctx() { req }: myContext) {
     if (req.session.userId) {
-      return User.findOne(req.session.userId, { relations: ["bookmarks"]});
+      return User.findOne(req.session.userId, { relations: ["bookmarks"] });
     } else {
       return null;
     }
@@ -54,5 +54,20 @@ export class userResolver {
         throw new Error("Incorrect password");
       }
     }
+  }
+
+  @Mutation(() => Boolean)
+  async logout(@Ctx() { req, res }: myContext): Promise<Boolean> {
+    return new Promise((resolve) => {
+      req.session.destroy((err) => {
+        res.clearCookie("qid");
+        if (err) {
+          console.log(err);
+          resolve(false);
+          return;
+        }
+        resolve(true);
+      });
+    });
   }
 }
