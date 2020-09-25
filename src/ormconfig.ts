@@ -1,7 +1,7 @@
-import { ConnectionOptions } from "typeorm";
-import { User } from "./entity/User";
-import { Bookmark } from "./entity/Bookmark";
 import "dotenv-safe/config";
+import { ConnectionOptions } from "typeorm";
+import { Bookmark } from "./entity/Bookmark";
+import { User } from "./entity/User";
 
 export default {
   type: "postgres",

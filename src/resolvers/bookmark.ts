@@ -1,7 +1,7 @@
-import { Bookmark } from "../entity/Bookmark";
 import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
-import { bookmarkInput, myContext, updateBookmarkInput } from "../lib/types";
+import { Bookmark } from "../entity/Bookmark";
 import { User } from "../entity/User";
+import { bookmarkInput, myContext, updateBookmarkInput } from "../lib/types";
 
 @Resolver(Bookmark)
 export class bookmarkResolver {

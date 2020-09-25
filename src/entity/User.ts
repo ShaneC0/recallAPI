@@ -1,13 +1,13 @@
+import { Field, ID, ObjectType } from "type-graphql";
 import {
-  Entity,
-  PrimaryGeneratedColumn,
+  BaseEntity,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
-  BaseEntity,
+  Entity,
   OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
-import { ObjectType, Field, ID } from "type-graphql";
 import { Bookmark } from "./Bookmark";
 
 @ObjectType()
