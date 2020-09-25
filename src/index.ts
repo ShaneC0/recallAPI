@@ -10,6 +10,7 @@ import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
 import "dotenv-safe/config";
+import helmet from "helmet";
 
 const main = async () => {
   await createConnection(config);
@@ -18,6 +19,8 @@ const main = async () => {
 
   const redisStore = connectRedis(session);
   const redisClient = redis.createClient();
+
+  app.use(helmet())
 
   app.use(
     session({
