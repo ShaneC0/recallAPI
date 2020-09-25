@@ -1,16 +1,16 @@
-import "reflect-metadata";
-import { createConnection } from "typeorm";
-import config from "./ormconfig";
-import express from "express";
 import { ApolloServer } from "apollo-server-express";
-import { buildSchema } from "type-graphql";
-import { bookmarkResolver } from "./resolvers/bookmark";
-import { userResolver } from "./resolvers/user";
-import redis from "redis";
-import session from "express-session";
 import connectRedis from "connect-redis";
 import "dotenv-safe/config";
+import express from "express";
+import session from "express-session";
 import helmet from "helmet";
+import redis from "redis";
+import "reflect-metadata";
+import { buildSchema } from "type-graphql";
+import { createConnection } from "typeorm";
+import config from "./ormconfig";
+import { bookmarkResolver } from "./resolvers/bookmark";
+import { userResolver } from "./resolvers/user";
 
 const main = async () => {
   await createConnection(config);
@@ -20,7 +20,7 @@ const main = async () => {
   const redisStore = connectRedis(session);
   const redisClient = redis.createClient();
 
-  app.use(helmet())
+  app.use(helmet());
 
   app.use(
     session({
@@ -42,7 +42,7 @@ const main = async () => {
     schema: await buildSchema({
       resolvers: [userResolver, bookmarkResolver],
     }),
-    context: ({ req, res }) => ({ req, res })
+    context: ({ req, res }) => ({ req, res }),
   });
 
   apolloServer.applyMiddleware({ app });
