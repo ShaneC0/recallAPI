@@ -3,5 +3,6 @@ declare namespace NodeJS {
     COOKIE_SECRET: string;
     TYPEORM_URL: string;
     POSTGRES_PASSWORD: string;
+    PORT: string;
   }
 }
