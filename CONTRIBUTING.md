@@ -5,23 +5,25 @@
  </ul>
 
 <h1>Steps</h1>
-* Clone repo
-    - git clone https://github.com/ShaneC0/recallAPI
-
-* Run npm install
-    - npm i
-
-* Copy example.env to a proper .env and fill in values
-    - cp env.example .env
-
-* Build js from ts
-    - tsc OR npm run watch
-
-* Run docker compose
-    - docker-compose up -d
+<ul>
+ <li>Clone repo - git clone https://github.com/ShaneC0/recallAPI</li>
   
-* Run the app
-    - npm run dev
+
+<li>Run npm install - npm i</li>
+  
+
+<li>Copy example.env to a proper .env and fill in values - cp env.example .env</li>
+
+
+<li>Build js from ts - tsc OR npm run watch</li>
+  
+
+<li>Run docker compose - docker-compose up -d</li>
+  
+  
+<li>Run the app - npm run dev</li>
+  
+</ul>
     
 IF ADDING OR REMOVING ENVIRONMENT VARIABLES
   - npm run gen-env
