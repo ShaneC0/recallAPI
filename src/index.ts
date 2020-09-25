@@ -42,14 +42,13 @@ const main = async () => {
     schema: await buildSchema({
       resolvers: [userResolver, bookmarkResolver],
     }),
-    context: ({ req, res }) => ({ req, res }),
-    playground: true,
+    context: ({ req, res }) => ({ req, res })
   });
 
   apolloServer.applyMiddleware({ app });
 
-  app.listen(8000, () => {
-    console.log("Server listening on localhost:8000");
+  app.listen(process.env.PORT, () => {
+    console.log(`Server listening on localhost:${process.env.PORT}/graphql`);
   });
 };
 
