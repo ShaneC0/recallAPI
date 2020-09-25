@@ -43,6 +43,7 @@ const main = async () => {
       resolvers: [userResolver, bookmarkResolver],
     }),
     context: ({ req, res }) => ({ req, res }),
+    playground: true,
   });
 
   apolloServer.applyMiddleware({ app });
