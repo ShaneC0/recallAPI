@@ -1,8 +1,10 @@
 <h1>Prerequisites</h1>
-- Docker/Docker Compose
-- Node.js
+ <ul>
+    <li>Docker/Docker Compose</li>
+    <li>Node.js</li>
+ </ul>
 
-
+<h1>Steps</h1>
 * Clone repo
     - git clone https://github.com/ShaneC0/recallAPI
 
