@@ -1,7 +1,5 @@
 import "dotenv-safe/config";
 import { ConnectionOptions } from "typeorm";
-import { Bookmark } from "./entity/Bookmark";
-import { User } from "./entity/User";
 
 export default {
   type: "postgres",
@@ -11,5 +9,5 @@ export default {
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   synchronize: true,
-  entities: [User, Bookmark],
+  entities: ["entity/*"],
 } as ConnectionOptions;
