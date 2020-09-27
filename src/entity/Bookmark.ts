@@ -36,8 +36,4 @@ export class Bookmark extends BaseEntity {
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.bookmarks)
   user!: User;
-
-  @Field(() => ID)
-  @Column()
-  userId!: number;
 }
