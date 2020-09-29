@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Bookmark } from "./Bookmark";
+import { Project } from "./Project";
 
 @ObjectType()
 @Entity()
@@ -36,7 +36,7 @@ export class User extends BaseEntity {
   @UpdateDateColumn()
   updatedDate: Date;
 
-  @Field(() => [Bookmark])
-  @OneToMany(() => Bookmark, (bookmark) => bookmark.user)
-  bookmarks!: Bookmark[];
+  @Field(() => [Project])
+  @OneToMany(() => Project, project => project.user)
+  projects: Project[]
 }

@@ -39,6 +39,28 @@ export class updateBookmarkInput {
   url?: string;
 }
 
+@InputType()
+export class projectInput {
+  @Field()
+  @Length(1, 20)
+  title: string;
+
+  @Field()
+  @Length(2, 255)
+  description: string;
+}
+
+@InputType()
+export class updateProjectInput {
+  @Field({ nullable: true })
+  @Length(1, 20)
+  title?: string;
+
+  @Field({ nullable: true })
+  @Length(2, 255)
+  description?: string;
+}
+
 export type myContext = {
   req: Request & { session: Express.Session };
   res: Response;
