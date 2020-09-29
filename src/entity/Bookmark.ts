@@ -6,25 +6,24 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne, OneToMany
+  ManyToOne,
 } from "typeorm";
-import { Bookmark } from "./Bookmark";
-import { User } from "./User";
+import { Project } from "./Project";
 
 @ObjectType()
 @Entity()
-export class Project extends BaseEntity {
+export class Bookmark extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Field()
   @Column()
-  title!: string;
+  name!: string;
 
   @Field()
   @Column()
-  description!: string;
+  url!: string;
 
   @Field()
   @CreateDateColumn()
@@ -34,11 +33,7 @@ export class Project extends BaseEntity {
   @UpdateDateColumn()
   updatedDate: Date;
 
-  @Field(() => User)
-  @ManyToOne(() => User, (user) => user.projects)
-  user: User;
-
-  @Field(() => [Bookmark])
-  @OneToMany(() => Bookmark, bookmark => bookmark.project)
-  bookmarks: Bookmark[]
+  @Field(() => Project)
+  @ManyToOne(() => Project, project => project.bookmarks)
+  project: Project
 }
