@@ -13,7 +13,7 @@ export class projectResolver {
 
   @Query(() => Project, { nullable: true })
   project(@Arg("id") id: number): Promise<Project | undefined> {
-    return Project.findOne(id);
+    return Project.findOne(id, { relations: ["bookmarks"] });
   }
 
   @Mutation(() => Project)

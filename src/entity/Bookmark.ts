@@ -33,6 +33,10 @@ export class Bookmark extends BaseEntity {
   @UpdateDateColumn()
   updatedDate: Date;
 
+  @Field(() => ID)
+  @Column()
+  projectId!: number;
+
   @Field(() => Project)
   @ManyToOne(() => Project, project => project.bookmarks)
   project!: Project

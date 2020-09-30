@@ -35,6 +35,10 @@ export class Project extends BaseEntity {
   @UpdateDateColumn()
   updatedDate: Date;
 
+  @Field(() => ID)
+  @Column()
+  userId!: number;
+
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.projects)
   user!: User;
