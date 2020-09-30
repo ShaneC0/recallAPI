@@ -38,5 +38,5 @@ export class User extends BaseEntity {
 
   @Field(() => [Project])
   @OneToMany(() => Project, project => project.user)
-  projects: Project[]
+  projects!: Project[]
 }

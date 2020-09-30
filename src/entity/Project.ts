@@ -37,13 +37,13 @@ export class Project extends BaseEntity {
 
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.projects)
-  user: User;
+  user!: User;
 
   @Field(() => [Bookmark])
   @OneToMany(() => Bookmark, bookmark => bookmark.project)
-  bookmarks: Bookmark[]
+  bookmarks!: Bookmark[]
 
   @Field(() => [Todo])
   @OneToMany(() => Todo, todo => todo.project)
-  todos: Todo[]
+  todos!: Todo[]
 }

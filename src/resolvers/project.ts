@@ -1,7 +1,8 @@
 import { Project } from "../entity/Project";
 import { Query, Arg, Resolver, Mutation, Ctx } from "type-graphql";
-import { myContext, projectInput, updateProjectInput } from "../lib/types";
 import { User } from "../entity/User";
+import { myContext } from "../index";
+import { projectInput, updateProjectInput } from "../lib/project-types";
 
 @Resolver(Project)
 export class projectResolver {
@@ -23,7 +24,7 @@ export class projectResolver {
     if (!req.session.userId) {
       throw new Error("Not Authorized");
     }
-    const user = await User.findOne({id: req.session.userId})
+    const user = await User.findOne({ id: req.session.userId });
     return Project.create({ ...options, user }).save();
   }
 
@@ -42,10 +43,10 @@ export class projectResolver {
 
   @Mutation(() => Boolean)
   async deleteProject(@Arg("id") id: number, @Ctx() { req }: myContext) {
-      if(!req.session.userId) {
-          throw new Error("Not Authorized")
-      }
-      await Project.delete(id)
-      return true
+    if (!req.session.userId) {
+      throw new Error("Not Authorized");
+    }
+    await Project.delete(id);
+    return true;
   }
 }

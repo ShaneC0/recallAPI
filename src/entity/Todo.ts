@@ -35,5 +35,5 @@ export class Todo extends BaseEntity {
 
   @Field(() => Project)
   @ManyToOne(() => Project, project => project.todos)
-  project: Project
+  project!: Project
 }

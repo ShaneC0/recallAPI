@@ -35,5 +35,5 @@ export class Bookmark extends BaseEntity {
 
   @Field(() => Project)
   @ManyToOne(() => Project, project => project.bookmarks)
-  project: Project
+  project!: Project
 }

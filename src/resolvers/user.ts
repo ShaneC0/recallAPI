@@ -1,8 +1,9 @@
 import argon2 from "argon2";
+import { myContext } from "../index";
+import { authInput } from "../lib/user-types";
 import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { getConnection } from "typeorm";
 import { User } from "../entity/User";
-import { authInput, myContext } from "../lib/types";
 
 @Resolver(User)
 export class userResolver {
