@@ -4,7 +4,7 @@ import { myContext, projectInput, updateProjectInput } from "../lib/types";
 import { User } from "../entity/User";
 
 @Resolver(Project)
-export class ProjectResolver {
+export class projectResolver {
   @Query(() => [Project])
   projects(): Promise<Project[]> {
     return Project.find();

@@ -9,7 +9,7 @@ import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 import config from "./ormconfig";
-import { ProjectResolver } from "./resolvers/project";
+import { projectResolver } from "./resolvers/project";
 import { userResolver } from "./resolvers/user";
 
 const main = async () => {
@@ -40,7 +40,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [ProjectResolver, userResolver],
+      resolvers: [userResolver, projectResolver],
     }),
     context: ({ req, res }) => ({ req, res }),
   });

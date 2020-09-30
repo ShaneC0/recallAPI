@@ -9,6 +9,7 @@ import {
   ManyToOne, OneToMany
 } from "typeorm";
 import { Bookmark } from "./Bookmark";
+import { Todo } from "./Todo";
 import { User } from "./User";
 
 @ObjectType()
@@ -41,4 +42,8 @@ export class Project extends BaseEntity {
   @Field(() => [Bookmark])
   @OneToMany(() => Bookmark, bookmark => bookmark.project)
   bookmarks: Bookmark[]
+
+  @Field(() => [Todo])
+  @OneToMany(() => Todo, todo => todo.project)
+  todos: Todo[]
 }
