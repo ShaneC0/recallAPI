@@ -26,6 +26,10 @@ export class Todo extends BaseEntity {
   description!: string;
 
   @Field()
+  @Column({ default: false })
+  done!: boolean;
+
+  @Field()
   @CreateDateColumn()
   createdDate: Date;
 
@@ -38,6 +42,6 @@ export class Todo extends BaseEntity {
   projectId: number;
 
   @Field(() => Project)
-  @ManyToOne(() => Project, project => project.todos)
-  project!: Project
+  @ManyToOne(() => Project, (project) => project.todos)
+  project!: Project;
 }

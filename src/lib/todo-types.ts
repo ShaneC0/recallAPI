@@ -5,7 +5,7 @@ import { Field, InputType } from "type-graphql";
 export class todoInput {
     @Field()
     @Length(1, 255)
-    title: string;
+    task: string;
 
     @Field()
     @Length(1, 255)
@@ -19,7 +19,7 @@ export class todoInput {
 export class updateTodoInput {
     @Field({ nullable: true })
     @Length(1, 255)
-    title?: string;
+    task?: string;
 
     @Field({ nullable: true })
     @Length(1, 255)
