@@ -4,6 +4,7 @@ services:
 
   app:
     build: .
+    restart: always
     ports: 
       - "8000:8000"
 
@@ -27,6 +28,7 @@ services:
     
   redis:
     image: redis
+    restart: always
     ports:
      - "6379:6379"
     volumes:
