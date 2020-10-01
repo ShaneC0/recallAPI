@@ -3,7 +3,7 @@ import connectRedis from "connect-redis";
 import "dotenv-safe/config";
 import express, { Request, Response } from "express";
 import session from "express-session";
-import helmet from "helmet";
+// import helmet from "helmet";
 import redis from "redis";
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
@@ -27,7 +27,7 @@ const main = async () => {
   const redisStore = connectRedis(session);
   const redisClient = redis.createClient();
 
-  app.use(helmet());
+  // app.use(helmet());
 
   app.use(
     session({
