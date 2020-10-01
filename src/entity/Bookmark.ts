@@ -1,14 +1,14 @@
-import { Field, ID, ObjectType } from "type-graphql";
+import { ObjectType, Field, ID } from "type-graphql";
 import {
+  Entity,
   BaseEntity,
+  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from "typeorm";
-import { User } from "./User";
+import { Project } from "./Project";
 
 @ObjectType()
 @Entity()
@@ -33,7 +33,11 @@ export class Bookmark extends BaseEntity {
   @UpdateDateColumn()
   updatedDate: Date;
 
-  @Field(() => User)
-  @ManyToOne(() => User, (user) => user.bookmarks)
-  user!: User;
+  @Field(() => ID)
+  @Column()
+  projectId!: number;
+
+  @Field(() => Project)
+  @ManyToOne(() => Project, project => project.bookmarks)
+  project!: Project
 }

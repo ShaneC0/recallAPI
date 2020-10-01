@@ -1,32 +1,29 @@
-import { Field, ID, ObjectType } from "type-graphql";
+import { ObjectType, Field, ID } from "type-graphql";
 import {
+  Entity,
   BaseEntity,
+  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from "typeorm";
 import { Project } from "./Project";
 
 @ObjectType()
 @Entity()
-export class User extends BaseEntity {
+export class Todo extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Field()
   @Column()
-  name!: string;
+  task!: string;
 
   @Field()
   @Column()
-  email!: string;
-
-  @Column()
-  password!: string;
+  description!: string;
 
   @Field()
   @CreateDateColumn()
@@ -36,7 +33,11 @@ export class User extends BaseEntity {
   @UpdateDateColumn()
   updatedDate: Date;
 
-  @Field(() => [Project])
-  @OneToMany(() => Project, project => project.user)
-  projects!: Project[]
+  @Field(() => ID)
+  @Column()
+  projectId: number;
+
+  @Field(() => Project)
+  @ManyToOne(() => Project, project => project.todos)
+  project!: Project
 }

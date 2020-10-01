@@ -1,15 +1,16 @@
 import argon2 from "argon2";
+import { myContext } from "../index";
+import { authInput } from "../lib/user-types";
 import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { getConnection } from "typeorm";
 import { User } from "../entity/User";
-import { authInput, myContext } from "../lib/types";
 
 @Resolver(User)
 export class userResolver {
   @Query(() => User, { nullable: true })
   me(@Ctx() { req }: myContext) {
     if (req.session.userId) {
-      return User.findOne(req.session.userId, { relations: ["bookmarks"] });
+      return User.findOne(req.session.userId, { relations: ["projects"] });
     } else {
       return null;
     }

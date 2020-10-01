@@ -1,7 +1,7 @@
-import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { Bookmark } from "../entity/Bookmark";
-import { User } from "../entity/User";
-import { bookmarkInput, myContext, updateBookmarkInput } from "../lib/types";
+import { Query, Arg, Resolver, Ctx, Mutation } from "type-graphql";
+import { bookmarkInput, updateBookmarkInput } from "../lib/bookmark-types";
+import { myContext } from "../index";
 
 @Resolver(Bookmark)
 export class bookmarkResolver {
@@ -16,45 +16,38 @@ export class bookmarkResolver {
   }
 
   @Mutation(() => Bookmark)
-  async createBookmark(
+  createBookmark(
     @Arg("options") options: bookmarkInput,
     @Ctx() { req }: myContext
   ): Promise<Bookmark> {
     if (!req.session.userId) {
-      throw new Error("Must be logged in to create bookmark");
-    } else {
-      const currentUser = await User.findOne({ id: req.session.userId });
-      return Bookmark.create({ ...options, user: currentUser }).save();
+      throw new Error("Not Authorized");
     }
+    return Bookmark.create({ ...options }).save();
   }
 
   @Mutation(() => Bookmark)
   async updateBookmark(
+    @Arg("id") id: number,
     @Arg("options") options: updateBookmarkInput,
-    @Arg("id") id: number
-  ): Promise<Bookmark> {
-    const updatingBookmark = await Bookmark.findOne({ id });
-    if (!updatingBookmark) {
-      throw new Error("Bookmark doesn't exist");
-    } else {
-      await Bookmark.update(id, { ...options });
-      const updatedBookmark = await Bookmark.findOne({ id });
-      if (!updatedBookmark) {
-        throw new Error("Error updating bookmark");
-      } else {
-        return updatedBookmark;
-      }
+    @Ctx() { req }: myContext
+  ): Promise<Bookmark | undefined> {
+    if (!req.session.userId) {
+      throw new Error("Not Authorized");
     }
+    await Bookmark.update(id, { ...options });
+    return Bookmark.findOne(id);
   }
 
   @Mutation(() => Boolean)
-  async deleteBookmark(@Arg("id") id: number): Promise<Boolean> {
-    const deletingBookmark = await Bookmark.findOne({ id });
-    if (!deletingBookmark) {
-      throw new Error("Bookmark doesn't exist");
-    } else {
-      await Bookmark.delete({ id });
-      return true;
+  async deleteBookmark(
+    @Arg("id") id: number,
+    @Ctx() { req }: myContext
+  ): Promise<Boolean> {
+    if (!req.session.userId) {
+      throw new Error("Not Authorized");
     }
+    await Bookmark.delete(id);
+    return true; 
   }
 }
