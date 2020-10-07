@@ -25,7 +25,7 @@ const main = async () => {
   const app = express();
 
   const redisStore = connectRedis(session);
-  const redisClient = redis.createClient({host: process.env.REDIS_HOST});
+  const redisClient = redis.createClient({ host: process.env.REDIS_HOST });
 
   // app.use(helmet());
 
@@ -47,12 +47,23 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [userResolver, projectResolver, bookmarkResolver, todoResolver ],
+      resolvers: [
+        userResolver,
+        projectResolver,
+        bookmarkResolver,
+        todoResolver,
+      ],
     }),
     context: ({ req, res }) => ({ req, res }),
   });
 
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({
+    app,
+    cors: {
+      origin: "localhost:3000",
+      credentials: true,
+    },
+  });
 
   app.listen(process.env.PORT, () => {
     console.log(`Server listening on localhost:${process.env.PORT}/graphql`);
